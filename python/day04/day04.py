@@ -17,10 +17,9 @@ def main():
         lines = f.read().splitlines()
 
     start_time = time.time()
-    cards = [1] * len(lines)
-    print(cards)
     
     # calc
+    cards = [1] * len(lines)
     for k, l in enumerate(lines):
         w, y = l.split(":")[1].split("|")
         ws = set([int(i.strip()) for i in w.strip().split(" ") if i.isdigit()])
