@@ -6,25 +6,18 @@ from math import floor
 
 
 def game1(game):
-    rmax = 12
-    gmax = 13
-    bmax = 14
+    mmax = [12, 13, 14]
     for g in game:
-        if g[0] > rmax or g[1] > gmax or g[2] > bmax:
+        if any([a > b for a, b in zip(g, mmax)]):
             return False
     return True
 
 
 def game2(game):
-    rmin = 0
-    gmin = 0
-    bmin = 0
+    mmin = [0, 0, 0]
     for g in game:
-        rmin = max(rmin, g[0])
-        gmin = max(gmin, g[1])
-        bmin = max(bmin, g[2])
-    return rmin * gmin * bmin
-
+        mmin = [max(a, b) for (a, b) in zip(mmin, g)]
+    return mmin[0] * mmin[1] * mmin[2]
 
 def main():
     # input
@@ -44,7 +37,8 @@ def main():
         currgame = []
         for g in games:
             gt = [0, 0, 0]
-            gc = g.split(",")
+            gc = g.split(", ")
+            print(gc)
             for e in gc:
                 if "red" in e:
                     gt[0] = int(re.findall(r"\d+", e)[0])
@@ -52,6 +46,8 @@ def main():
                     gt[1] = int(re.findall(r"\d+", e)[0])
                 if "blue" in e:
                     gt[2] = int(re.findall(r"\d+", e)[0])
+                # else:
+                #     print("haha")
             currgame.append(gt)
 
         if game1(currgame):
